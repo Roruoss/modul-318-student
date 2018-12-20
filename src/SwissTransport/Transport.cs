@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Net;
 using Newtonsoft.Json;
-
+using System.Threading.Tasks;
 namespace SwissTransport
 {
     public class Transport : ITransport
@@ -43,6 +43,9 @@ namespace SwissTransport
             return null;
         }
 
+
+
+
         public Connections GetConnections(string fromStation, string toStation)
         {
             fromStation = System.Uri.EscapeDataString(fromStation);
@@ -69,8 +72,32 @@ namespace SwissTransport
 
             webProxy.Credentials = CredentialCache.DefaultNetworkCredentials;
             request.Proxy = webProxy;
-            
+
             return request;
+        }
+
+        public Connections GetConnections(string fromStation, string toStattion, string date, string time)
+        {
+            var request =
+                 CreateWebRequest("http://transport.opendata.ch/v1/connections?from="
+                 + fromStation + "&to=" + toStattion + "&date=" + date + "&time=" + time + "&limit=6");
+            var response = request.GetResponse();
+            var responseStream = response.GetResponseStream();
+            if (responseStream != null)
+            {
+                var readToEnd = new
+                    StreamReader(responseStream).ReadToEnd();
+                var connections =
+                    JsonConvert.DeserializeObject<Connections>(readToEnd);
+                return connections;
+            }
+            return null;
+        }
+
+        object ITransport.GetConnections(string v1, string v2)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
+        
