@@ -13,7 +13,7 @@ namespace SwissTransport
             testee = new Transport();
             var stations = testee.GetStations("Sursee,");
 
-            Assert.AreEqual(50, stations.StationList.Count);
+            Assert.AreEqual(10, stations.StationList.Count);
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace SwissTransport
         public void Connections()
         {
             testee = new Transport();
-            var connections = testee.GetConnections("Sursee", "Luzern");
+            var connections = testee.GetConnections("Sursee", "Luzern", "2018-02-20", "13:00");
 
             Assert.IsNotNull(connections);
         }

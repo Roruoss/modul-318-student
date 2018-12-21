@@ -134,7 +134,7 @@ namespace Fahrplan_Romano_Ruoss
 
 
 
-       
+
 
 
         private void Create_GooglemapStation(string x, string y)
@@ -159,8 +159,7 @@ namespace Fahrplan_Romano_Ruoss
 
         private void btnSchliessen_Click(object sender, EventArgs e)
         {
-            WBGMaps.Visible = false;
-            btnSchliessen.Visible = false;
+            Close();
         }
 
         private void txtStart_TextChanged(object sender, EventArgs e)
@@ -232,20 +231,36 @@ namespace Fahrplan_Romano_Ruoss
         {
             if (txtMail.Text == "")
 
-            MessageBox.Show("Bitte geben Sie eine Email-Adresse eingeben");
-            else{
+                MessageBox.Show("Bitte geben Sie eine Email-Adresse eingeben");
+            else {
                 try
                 {
                     MailMessage email = new MailMessage();
-                    email.From = new MailAddress("mail.318)
-                    
-                    
+                    email.From = new MailAddress("m318.rossi@gmail.com");
+                    email.To.Add(new MailAddress(Convert.ToString(this.txtMail)));
+                    email.Subject = "Fahrplan";
+                    email.Body = "Deine Fahrplandaten wurden erfolgreich übermittelt.";
+                    email.Body += "<b>" + Get_TablefromDataGrid() + "</b>";
+                    email.IsBodyHtml = true;
+                    SmtpClient SmtpServer = new SmtpClient();
+                    SmtpServer.Host = "smtp.gmail.com";
+                    SmtpServer.Port = 587;
+                    SmtpServer.Credentials = new System.Net.NetworkCredential("m318.rossi@gmail.com", "hacksbro95");
+                    SmtpServer.EnableSsl = true;
+                    SmtpServer.Send(email);
+                    MessageBox.Show("Dein Email wurde erfolgreich gesendet");
+
+
 
                 }
                 catch (Exception ex)
+                {
+                    MessageBox.Show("Error:" + ex.Message);
+                }
             }
         }
     }
+}
         
     
 
