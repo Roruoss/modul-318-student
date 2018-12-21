@@ -40,6 +40,7 @@ namespace Fahrplan_Romano_Ruoss
 
             }
         }
+        //Methode um Tabelle in DataGrip zu erstellen
         public string Get_TablefromDataGrid()
         {
             StringBuilder strTable = new StringBuilder();
@@ -73,7 +74,7 @@ namespace Fahrplan_Romano_Ruoss
             return strTable.ToString();
 
 
-        }
+        }//Methode für das Erstellen von Attributen einer Tabelle um Verbindungen zu suchen
         private void GetGrid()
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -87,7 +88,7 @@ namespace Fahrplan_Romano_Ruoss
             dttConnections.Columns.Add("Gleis");
 
             Connections connections = transport.GetConnections(txtStart.Text, txtEnd.Text, dtDatum.Value.ToString("yyyy-MM-dd"), dtZeit.Text);
-
+            //Jedes Resultat wird zur Liste hinzugefügt
             foreach (Connection connection in connections.ConnectionList)
             {
                 dttConnections.Rows.Add(GetDatum(connection.From.Departure), connection.From.Station.Name, GetTime(connection.From.Departure), connection.To.Station.Name, GetTime(connection.To.Arrival), connection.To.Platform);
@@ -98,7 +99,7 @@ namespace Fahrplan_Romano_Ruoss
 
 
 
-        }
+        }//Methode für die Abfahrtstafel-Tabelle
         private void GetGrid2()
         {
             DataTable dttRoutes = new DataTable();
@@ -136,13 +137,14 @@ namespace Fahrplan_Romano_Ruoss
 
 
 
-
+        //Methode um Google Maps anzeigen zu lassen
         private void Create_GooglemapStation(string x, string y)
         {
             string url = "https://www.google.ch/maps/place/" + x + "," + y;
             WBGMaps.Navigate(url);
         }
 
+        //Event um Verbindungen zu suchen
         private void btnSuchen_Click(object sender, EventArgs e)
         {
             if (txtStart.Text != string.Empty)
@@ -156,12 +158,12 @@ namespace Fahrplan_Romano_Ruoss
             }
 
         }
-
+        //Event um Applikation zu schliessen
         private void btnSchliessen_Click(object sender, EventArgs e)
         {
             Close();
         }
-
+        //Daten werden an die Textbox "von" hinzugegeben
         private void txtStart_TextChanged(object sender, EventArgs e)
         {
             Get_Stations(txtStart.Text, lsbStart);
@@ -171,7 +173,7 @@ namespace Fahrplan_Romano_Ruoss
         {
             Get_Stations(txtEnd.Text, lsbEnd);
         }
-
+        //Event um Daten anzuzeigen von DataGrid2 (Abfahrtstafel)
         private void btnAbfahrtstafel_Click(object sender, EventArgs e)
         {
             {
@@ -185,7 +187,7 @@ namespace Fahrplan_Romano_Ruoss
                 }
             }
         }
-
+        //Die eingegebenden Daten in der Abfahrtsstation werden in dieser Liste hinüber angezeigt
         private void lsbStart_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtStart.Text = lsbStart.SelectedItem.ToString();
@@ -199,7 +201,7 @@ namespace Fahrplan_Romano_Ruoss
             btnSuchen.Focus();
             lsbEnd.Visible = false;
         }
-
+        //Event um die Haltestelle auf Google Maps anzuzeigen
         private void btnGoogleMaps_Click(object sender, EventArgs e)
         {
             if (txtStart.Text != string.Empty)
@@ -217,7 +219,7 @@ namespace Fahrplan_Romano_Ruoss
                 MessageBox.Show("Bitte geben Sie einen Ort ein");
             }
         }
-
+        //Beide Standorte wechseln
         private void lbswitch_Click(object sender, EventArgs e)
         {
             string von = txtStart.Text;
@@ -226,7 +228,7 @@ namespace Fahrplan_Romano_Ruoss
             txtEnd.Text = von;
             txtStart.Text = nach;
         }
-
+        //Event um Fahrplan bzw Anzeigetafel per Email zu senden
         private void btnEmail_Click(object sender, EventArgs e)
         {
             if (txtMail.Text == "")

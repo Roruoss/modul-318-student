@@ -31,6 +31,7 @@ namespace Fahrplan_Romano_Ruoss
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.txtMail = new System.Windows.Forms.TextBox();
             this.WBGMaps = new System.Windows.Forms.WebBrowser();
             this.btnGoogleMaps = new System.Windows.Forms.Button();
@@ -52,7 +53,6 @@ namespace Fahrplan_Romano_Ruoss
             this.dtgVerbindungen = new System.Windows.Forms.DataGridView();
             this.txtEnd = new System.Windows.Forms.TextBox();
             this.txtStart = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgVerbindungen)).BeginInit();
             this.SuspendLayout();
@@ -86,6 +86,15 @@ namespace Fahrplan_Romano_Ruoss
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1274, 647);
             this.panel1.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 337);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(147, 20);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Liste an Email versenden";
             // 
             // txtMail
             // 
@@ -291,21 +300,13 @@ namespace Fahrplan_Romano_Ruoss
             this.txtStart.TabIndex = 0;
             this.txtStart.TextChanged += new System.EventHandler(this.txtStart_TextChanged);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 337);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(147, 20);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Liste an Email versenden";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1315, 712);
             this.Controls.Add(this.panel1);
+            this.MaximumSize = new System.Drawing.Size(1331, 751);
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
